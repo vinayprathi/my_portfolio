@@ -1,0 +1,2016 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vinay Bhaskar Prathi | Data Scientist & ML Engineer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #f5f5f5;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .nav {
+            background: #000;
+            padding: 25px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-left {
+            display: flex;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .logo {
+            width: 80px;
+            height: 50px;
+            background: #000;
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 400;
+            color: #fff;
+            text-decoration: none;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            border: 2px solid #333;
+        }
+
+        .logo:hover {
+            transform: translateY(-2px) scale(1.05);
+            border-color: #555;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 400;
+            transition: color 0.3s ease;
+            cursor: pointer;
+            letter-spacing: 0.5px;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #ddd;
+        }
+
+        .nav-links a.active {
+            color: #999;
+            font-weight: 500;
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .nav-icon {
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            color: #fff;
+            font-size: 18px;
+        }
+
+        .nav-icon:hover {
+            color: #ddd;
+            transform: translateY(-2px);
+        }
+
+        .nav-icon.linkedin:hover {
+            color: #0077b5;
+        }
+
+        .nav-icon.email:hover {
+            color: #ea4335;
+        }
+
+        .nav-icon.instagram:hover {
+            color: #e4405f;
+        }
+
+        /* Hero/Home Page */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding-top: 90px;
+            overflow: hidden;
+        }
+
+        .background-photos {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .background-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            transition: clip-path 0.1s ease-out, transform 0.3s ease-out;
+        }
+
+        .bg-normal {
+            background-image: url('photo-normal.jpg');
+            z-index: 2;
+            clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%);
+        }
+
+        .bg-artistic {
+            background-image: url('photo-artistic.jpg');
+            z-index: 1;
+            clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
+        }
+
+        .content-overlay {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .split-layout {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            width: 100%;
+            align-items: center;
+            gap: 0;
+        }
+
+        .left-side {
+            text-align: right;
+            padding-right: 150px;
+            opacity: 1;
+            transition: opacity 0.2s ease-out;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px 20px;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+            cursor: pointer;
+            position: relative;
+            top: -100px;
+            right: -120px;
+            max-width: 200px;
+        }
+
+        .left-side.active {
+            opacity: 1;
+            background: rgba(255, 255, 255, 0.98);
+        }
+
+        .left-side:hover {
+            transform: scale(1.02);
+            transition: all 0.3s ease;
+        }
+
+        .left-title {
+            font-size: 48px;
+            font-weight: 700;
+            color: #2563eb;
+            margin-bottom: 12px;
+            line-height: 1;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .left-description {
+            font-size: 11px;
+            color: #666;
+            line-height: 1.5;
+            max-width: 180px;
+            margin-left: auto;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+        }
+
+        .right-side {
+            text-align: left;
+            padding-left: 200px;
+            opacity: 1;
+            transition: opacity 0.2s ease-out;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px 20px;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+            cursor: pointer;
+            position: relative;
+            top: -100px;
+            left: 120px;
+            max-width: 200px;
+        }
+
+        .right-side.active {
+            opacity: 1;
+            background: rgba(255, 255, 255, 0.98);
+        }
+
+        .right-side:hover {
+            transform: scale(1.02);
+            transition: all 0.3s ease;
+        }
+
+        .right-title {
+            font-size: 48px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 12px;
+            line-height: 1;
+            font-family: 'Inter', sans-serif;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .right-title::before {
+            content: '<';
+            color: #666;
+        }
+
+        .right-title::after {
+            content: '>';
+            color: #666;
+        }
+
+        .right-description {
+            font-size: 11px;
+            color: #666;
+            line-height: 1.5;
+            max-width: 180px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+        }
+
+        /* Page Sections */
+        .section {
+            min-height: 100vh;
+            padding: 120px 0 50px;
+            background: #fff;
+        }
+
+        .section:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .section-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .page-title {
+            font-size: 48px;
+            font-weight: 300;
+            color: #333;
+            margin-bottom: 60px;
+            text-align: center;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .page-title.personal-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 40px;
+        }
+
+        .page-title.personal-title .code-word {
+            color: #2563eb;
+        }
+
+        /* About Page */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr 1fr;
+            gap: 60px;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about-image {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .profile-photo {
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border: 4px solid #fff;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .profile-photo:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 30px 60px rgba(102, 126, 234, 0.2);
+        }
+
+        .about-text-content {
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .achievement-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .achievement-card {
+            background: #fff;
+            border: 1px solid #e5e7eb;
+            border-radius: 16px;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .achievement-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .achievement-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: #4b5563;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .achievement-icon i {
+            font-size: 48px;
+        }
+
+        .achievement-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 8px;
+            line-height: 1;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .achievement-label {
+            font-size: 1rem;
+            color: #6b7280;
+            font-weight: 400;
+            line-height: 1.2;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .about-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: #333;
+            line-height: 0.9;
+            margin-bottom: 30px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .about-title::after {
+            content: '.';
+            color: #667eea;
+        }
+
+        .primary-statement {
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: #2c2c2c;
+            line-height: 1.4;
+            margin-bottom: 20px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .background-summary {
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .signature {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.8rem;
+            color: #9ca3af;
+            opacity: 0.7;
+            margin-top: 20px;
+            font-weight: 300;
+            font-style: italic;
+        }
+
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-80px);
+            transition: all 1s ease;
+        }
+
+        .slide-in-right {
+            opacity: 0;
+            transform: translateX(80px);
+            transition: all 1s ease;
+        }
+
+        .slide-in-left.visible,
+        .slide-in-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .slide-in-left {
+            transition-delay: 0.2s;
+        }
+
+        .slide-in-right {
+            transition-delay: 0.4s;
+        }
+
+        /* Portfolio Timeline */
+        .timeline {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, #667eea, #764ba2, #f093fb, #f5576c);
+            transform: translateX(-50%);
+            border-radius: 2px;
+            height: 85%;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 60px;
+            width: 45%;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            padding-right: 50px;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 55%;
+            padding-left: 50px;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            text-align: right;
+            border-radius: 16px 8px 16px 16px;
+            margin-left: auto;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            text-align: left;
+            border-radius: 8px 16px 16px 16px;
+        }
+
+        .timeline-content {
+            background: #fff;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            border: 1px solid #f0f0f0;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(102, 126, 234, 0.12);
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 25px;
+            width: 0;
+            height: 0;
+            border: 12px solid transparent;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content::before {
+            right: -24px;
+            border-left-color: #fff;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::before {
+            left: -24px;
+            border-right-color: #fff;
+        }
+
+        .timeline-icon {
+            position: absolute;
+            top: 15px;
+            width: 45px;
+            height: 45px;
+            background: #fff;
+            border: 3px solid #667eea;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: #667eea;
+            box-shadow: 0 3px 10px rgba(102, 126, 234, 0.2);
+            z-index: 10;
+        }
+
+        .timeline-icon i {
+            font-size: 24px;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-icon {
+            right: -22px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-icon {
+            left: -22px;
+        }
+
+        .timeline-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 6px;
+            line-height: 1.2;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .timeline-company {
+            font-size: 15px;
+            font-weight: 500;
+            color: #667eea;
+            margin-bottom: 6px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .timeline-date {
+            font-size: 13px;
+            color: #64748b;
+            font-weight: 400;
+            margin-bottom: 12px;
+            display: inline-block;
+            background: #f1f5f9;
+            padding: 3px 10px;
+            border-radius: 10px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .timeline-description {
+            font-size: 14px;
+            color: #4b5563;
+            line-height: 1.5;
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+        }
+
+        .timeline-skills {
+            margin-top: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .timeline-skill {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-size: 11px;
+            font-weight: 500;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-skills {
+            justify-content: flex-end;
+        }
+
+        /* Personal Section */
+        .personal-content {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 60px;
+            align-items: center;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .personal-text {
+            font-size: 1.2rem;
+            color: #4b5563;
+            line-height: 1.6;
+            font-family: 'Georgia', serif;
+            font-weight: 400;
+        }
+
+        .personal-image {
+            position: relative;
+        }
+
+        .personal-photo {
+            width: 100%;
+            height: 420px;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Contact Page */
+        .contact-content {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-text {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #666;
+            margin-bottom: 40px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+        }
+
+        .contact-icons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .contact-icon {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #333;
+            transition: transform 0.3s ease;
+            padding: 25px;
+            border-radius: 12px;
+            background: #f8f9fa;
+        }
+
+        .contact-icon:hover {
+            transform: translateY(-5px);
+            background: #f1f3f4;
+        }
+
+        .contact-icon i {
+            font-size: 56px;
+            margin-bottom: 15px;
+            transition: color 0.3s ease;
+        }
+
+        .contact-icon.linkedin i {
+            color: #0077b5;
+        }
+
+        .contact-icon.email i {
+            color: #ea4335;
+        }
+
+        .contact-icon.instagram i {
+            color: #e4405f;
+        }
+
+        .contact-icon.github i {
+            color: #333;
+        }
+
+        .contact-icon:hover.linkedin i {
+            color: #005885;
+        }
+
+        .contact-icon:hover.email i {
+            color: #c23321;
+        }
+
+        .contact-icon:hover.instagram i {
+            color: #c13584;
+        }
+
+        .contact-icon:hover.github i {
+            color: #000;
+        }
+
+        .contact-icon-label {
+            font-size: 16px;
+            font-weight: 500;
+            color: #333;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Section Intro */
+        .section-intro {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: stretch;
+            margin: 80px auto 80px auto;
+            max-width: 1000px;
+            min-height: 400px;
+        }
+
+        .section-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 16px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .section-text-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 20px 0;
+        }
+
+        .section-main-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #1f2937;
+            line-height: 1.1;
+            margin-bottom: 30px;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: -0.02em;
+        }
+
+        .section-description {
+            font-size: 1.3rem;
+            color: #4b5563;
+            line-height: 1.6;
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            max-width: 100%;
+        }
+
+        .projects-subheading {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #374151;
+            margin: 40px 0 30px 0;
+            font-family: 'Inter', sans-serif;
+            font-style: italic;
+        }
+
+        /* Tech Stack */
+        .tech-stack-section {
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        .tech-stack-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 30px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .tech-stack-grid {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 25px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .tech-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            min-width: 80px;
+        }
+
+        .tech-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .tech-icon {
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tech-icon img {
+            width: 45px;
+            height: 45px;
+            object-fit: contain;
+        }
+
+        .tech-name {
+            font-size: 12px;
+            font-weight: 500;
+            color: #4b5563;
+            font-family: 'Inter', sans-serif;
+            text-align: center;
+        }
+
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .timeline-item {
+                width: 100%;
+                left: 0 !important;
+                padding: 0 0 0 40px !important;
+                text-align: left !important;
+                margin-bottom: 40px;
+            }
+
+            .timeline-item .timeline-content {
+                text-align: left !important;
+                border-radius: 8px 16px 16px 16px !important;
+            }
+
+            .timeline-item .timeline-content::before {
+                left: -24px !important;
+                border-right-color: #fff !important;
+                border-left-color: transparent !important;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-icon {
+                left: -2px !important;
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+
+            .timeline-skills {
+                justify-content: flex-start !important;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+            }
+
+            .about-text-content {
+                padding: 0;
+                order: 2;
+            }
+
+            .about-image {
+                order: 1;
+            }
+
+            .achievement-cards {
+                order: 3;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+
+            .achievement-card {
+                flex: 1;
+                min-width: 150px;
+                max-width: 200px;
+                padding: 20px 15px;
+            }
+
+            .achievement-icon {
+                font-size: 36px;
+                margin-bottom: 15px;
+            }
+
+            .achievement-number {
+                font-size: 2rem;
+            }
+
+            .achievement-label {
+                font-size: 0.9rem;
+            }
+
+            .about-title {
+                font-size: 3rem;
+            }
+
+            .profile-photo {
+                width: 220px;
+                height: 220px;
+            }
+
+            .primary-statement {
+                font-size: 1.2rem;
+            }
+
+            .background-summary {
+                font-size: 1rem;
+            }
+
+            .split-layout {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                text-align: center;
+            }
+
+            .left-side, .right-side {
+                position: static;
+                padding: 20px;
+            }
+
+            .left-title, .right-title {
+                font-size: 40px;
+            }
+
+            .nav-content {
+                flex-direction: column;
+                gap: 20px;
+                padding: 0 20px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .section-intro {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 25px;
+                margin: 40px auto;
+                min-height: auto;
+            }
+
+            .section-photo {
+                width: 200px;
+                height: 200px;
+                margin: 0 auto;
+            }
+
+            .section-main-title {
+                font-size: 2.5rem;
+                margin-bottom: 20px;
+            }
+
+            .section-description {
+                font-size: 1.1rem;
+            }
+
+            .personal-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                text-align: center;
+            }
+
+            .personal-photo {
+                height: 350px;
+                margin: 0 auto;
+                max-width: 250px;
+            }
+
+            .tech-stack-grid {
+                gap: 15px;
+            }
+
+            .tech-item {
+                min-width: 70px;
+                padding: 12px;
+            }
+
+            .tech-icon img {
+                width: 35px;
+                height: 35px;
+                object-fit: contain;
+            }
+
+            .tech-name {
+                font-size: 11px;
+            }
+
+            .contact-icons {
+                grid-template-columns: 1fr 1fr;
+                gap: 20px;
+            }
+
+            .contact-icon {
+                padding: 20px;
+            }
+
+            .contact-icon i {
+                font-size: 48px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-content">
+            <div class="nav-left">
+                <a href="#hero" class="logo">Vinay</a>
+                <ul class="nav-links">
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
+                    <li><a href="#personal" class="nav-link">Personal</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+            </div>
+            <div class="nav-icons">
+                <a href="https://linkedin.com/in/vinayprathi" target="_blank" class="nav-icon linkedin">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="mailto:vinaybhaskarprathi@gmail.com" class="nav-icon email">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <a href="https://instagram.com/vinay_bhaskar_07" target="_blank" class="nav-icon instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero/Home Page -->
+    <div id="hero" class="hero">
+        <div class="background-photos">
+            <div class="background-layer bg-normal"></div>
+            <div class="background-layer bg-artistic"></div>
+        </div>
+
+        <div class="content-overlay">
+            <div class="split-layout">
+                <div class="left-side" id="leftSide" onclick="scrollToSection('software-projects')">
+                    <h1 class="left-title">software developer</h1>
+                    <p class="left-description">
+                        Building scalable backend systems and APIs.
+                    </p>
+                </div>
+
+                <div style="width: 200px;"></div>
+
+                <div class="right-side" id="rightSide" onclick="scrollToSection('data-science-projects')">
+                    <h1 class="right-title">data scientist</h1>
+                    <p class="right-description">
+                        Insights from complex data patterns and ML models.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="section-content">
+            <div class="about-grid">
+                <!-- Left: Profile Photo -->
+                <div class="about-image slide-in-left">
+                    <img src="about.jpg" alt="Vinay Bhaskar Prathi" class="profile-photo">
+                </div>
+                
+                <!-- Middle: Text Content -->
+                <div class="about-text-content slide-in-left">
+                    <h1 class="about-title">about</h1>
+                    <p class="primary-statement">
+                        I'm passionate about building impactful solutions at the intersection of Data Science and software development, driven by curiosity and a mindset of continuous learning.
+                    </p>
+                    <p class="background-summary">
+                        I hold a Master's degree in Data Science from UTA and bring 3+ years of experience building intelligent software products and machine learning models that solve real-world problems.
+                    </p>
+                    <div class="signature">~ Vinay</div>
+                </div>
+                
+                <!-- Right: Achievement Cards -->
+                <div class="achievement-cards slide-in-right">
+                    <div class="achievement-card">
+                        <div class="achievement-icon">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <div class="achievement-number">3+</div>
+                        <div class="achievement-label">Years Experience</div>
+                    </div>
+                    
+                    <div class="achievement-card">
+                        <div class="achievement-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <div class="achievement-number">10+</div>
+                        <div class="achievement-label">Projects</div>
+                    </div>
+                    
+                    <div class="achievement-card">
+                        <div class="achievement-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="achievement-number">MSDS</div>
+                        <div class="achievement-label">UT Arlington</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="section">
+        <div class="section-content">
+            <h1 class="page-title">Professional Timeline</h1>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">Research Assistant</h3>
+                        <p class="timeline-company">UTA Research Lab</p>
+                        <p class="timeline-date">08/2023 - Present</p>
+                        <p class="timeline-description">
+                            Leading research in medical image analysis, developing end-to-end ML pipelines for MRI image 
+                            classification achieving 91% accuracy. Implementing containerized workflows and CI/CD pipelines.
+                        </p>
+                        <div class="timeline-skills">
+                            <span class="timeline-skill">Computer Vision</span>
+                            <span class="timeline-skill">MLOps</span>
+                            <span class="timeline-skill">Research</span>
+                        </div>
+                    </div>
+                    <div class="timeline-icon">
+                        <i class="fas fa-flask"></i>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">ML Engineer</h3>
+                        <p class="timeline-company">Tata Consultancy Services</p>
+                        <p class="timeline-date">03/2022 - 08/2023</p>
+                        <p class="timeline-description">
+                            Built scalable NLP preprocessing pipelines for conversational AI platform serving enterprise clients. 
+                            Optimized system performance to handle 500K+ multilingual transcripts daily with 30% improvement.
+                        </p>
+                        <div class="timeline-skills">
+                            <span class="timeline-skill">NLP</span>
+                            <span class="timeline-skill">Python</span>
+                            <span class="timeline-skill">Scalability</span>
+                        </div>
+                    </div>
+                    <div class="timeline-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">Data Analyst</h3>
+                        <p class="timeline-company">Raghuram Hume Pipes</p>
+                        <p class="timeline-date">12/2020 - 02/2022</p>
+                        <p class="timeline-description">
+                            Created comprehensive Power BI dashboards and developed forecasting models achieving 90%+ accuracy. 
+                            Improved delivery performance from 72% to 86% through data-driven insights and process optimization.
+                        </p>
+                        <div class="timeline-skills">
+                            <span class="timeline-skill">Power BI</span>
+                            <span class="timeline-skill">Forecasting</span>
+                            <span class="timeline-skill">Data Analysis</span>
+                        </div>
+                    </div>
+                    <div class="timeline-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Projects Section -->
+    <div id="portfolio-root"></div>
+
+    <!-- Personal Section -->
+    <section id="personal" class="section">
+        <div class="section-content">
+            <h1 class="page-title personal-title">Movement fuels my BRAIN and <span class="code-word">CODE</span></h1>
+            <div class="personal-content">
+                <div class="personal-text">
+                    When I'm not coding, you'll find me lifting weights, enjoying recreational activities, or leading high-energy fitness sessions as a certified instructor.
+                </div>
+                <div class="personal-image">
+                    <img src="fit.jpg" alt="Fitness" class="personal-photo">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="section-content">
+            <h1 class="page-title">Get in Touch</h1>
+            <div class="contact-content">
+                <p class="contact-text">
+                    Got a project, idea, or just want to say hi? Let's connect!
+                </p>
+                <div class="contact-icons">
+                    <a href="https://linkedin.com/in/vinayprathi" target="_blank" class="contact-icon linkedin">
+                        <i class="fab fa-linkedin"></i>
+                        <div class="contact-icon-label">LinkedIn</div>
+                    </a>
+                    <a href="mailto:vinaybhaskarprathi@gmail.com" class="contact-icon email">
+                        <i class="fas fa-envelope"></i>
+                        <div class="contact-icon-label">Gmail</div>
+                    </a>
+                    <a href="https://instagram.com/vinay_bhaskar_07" target="_blank" class="contact-icon instagram">
+                        <i class="fab fa-instagram"></i>
+                        <div class="contact-icon-label">Instagram</div>
+                    </a>
+                    <a href="https://github.com/vinayprathi" target="_blank" class="contact-icon github">
+                        <i class="fab fa-github"></i>
+                        <div class="contact-icon-label">GitHub</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <script>
+        // Navigation active state
+        function updateActiveNav() {
+            const sections = ['hero', 'about', 'portfolio', 'personal', 'contact'];
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let currentSection = '';
+            
+            sections.forEach(section => {
+                const element = document.getElementById(section);
+                if (element) {
+                    const rect = element.getBoundingClientRect();
+                    if (rect.top <= 200 && rect.bottom >= 200) {
+                        currentSection = section === 'hero' ? '' : section;
+                    }
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                const href = link.getAttribute('href').substring(1);
+                if (href === currentSection) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for slide-in animations
+        const observerOptions = {
+            threshold: 0.3,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe slide-in elements and timeline items
+        document.addEventListener('DOMContentLoaded', function() {
+            const slideElements = document.querySelectorAll('.slide-in-left, .slide-in-right');
+            slideElements.forEach(el => observer.observe(el));
+            
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            timelineItems.forEach(el => observer.observe(el));
+
+            // Update active nav on scroll
+            window.addEventListener('scroll', updateActiveNav);
+            updateActiveNav(); // Initial call
+        });
+
+        // Function to scroll to specific sections
+        function scrollToSection(sectionId) {
+            const target = document.getElementById(sectionId);
+            if (target) {
+                const navHeight = 120;
+                const targetPosition = target.offsetTop - navHeight;
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        // Split screen cursor tracking (Hero section only)
+        const leftSide = document.getElementById('leftSide');
+        const rightSide = document.getElementById('rightSide');
+        const hero = document.getElementById('hero');
+        const bgNormal = document.querySelector('.bg-normal');
+        const bgArtistic = document.querySelector('.bg-artistic');
+
+        hero.addEventListener('mousemove', (e) => {
+            const rect = hero.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const mouseX = e.clientX;
+            
+            const percentage = (mouseX - centerX) / (rect.width / 2);
+            const clampedPercentage = Math.max(-1, Math.min(1, percentage));
+            
+            let splitPercentage;
+            if (clampedPercentage <= 0) {
+                splitPercentage = 50 + (clampedPercentage * 200);
+            } else {
+                splitPercentage = 50 + (clampedPercentage * 200);
+            }
+            
+            splitPercentage = Math.max(0, Math.min(100, splitPercentage));
+            
+            if (bgNormal && bgArtistic) {
+                bgNormal.style.clipPath = `polygon(${splitPercentage}% 0, 100% 0, 100% 100%, ${splitPercentage}% 100%)`;
+                bgArtistic.style.clipPath = `polygon(0 0, ${splitPercentage}% 0, ${splitPercentage}% 100%, 0 100%)`;
+                
+                const parallaxShift = clampedPercentage * 50;
+                bgNormal.style.transform = `translateX(${-parallaxShift}px)`;
+                bgArtistic.style.transform = `translateX(${-parallaxShift}px)`;
+            }
+            
+            if (clampedPercentage < -0.15) {
+                leftSide.classList.add('active');
+                rightSide.classList.remove('active');
+                rightSide.style.opacity = '0.2';
+                rightSide.style.visibility = 'visible';
+                leftSide.style.opacity = '1';
+                leftSide.style.visibility = 'visible';
+            } else if (clampedPercentage > 0.15) {
+                rightSide.classList.add('active');
+                leftSide.classList.remove('active');
+                leftSide.style.opacity = '0.2';
+                leftSide.style.visibility = 'visible';
+                rightSide.style.opacity = '1';
+                rightSide.style.visibility = 'visible';
+            } else {
+                leftSide.classList.remove('active');
+                rightSide.classList.remove('active');
+                leftSide.style.opacity = '1';
+                leftSide.style.visibility = 'visible';
+                rightSide.style.opacity = '1';
+                rightSide.style.visibility = 'visible';
+            }
+        });
+
+        hero.addEventListener('mouseleave', () => {
+            leftSide.classList.remove('active');
+            rightSide.classList.remove('active');
+            
+            if (bgNormal && bgArtistic) {
+                bgNormal.style.clipPath = 'polygon(50% 0, 100% 0, 100% 100%, 50% 100%)';
+                bgArtistic.style.clipPath = 'polygon(0 0, 50% 0, 50% 100%, 0 100%)';
+                bgNormal.style.transform = 'translateX(0px)';
+                bgArtistic.style.transform = 'translateX(0px)';
+            }
+            
+            leftSide.style.opacity = '1';
+            leftSide.style.visibility = 'visible';
+            rightSide.style.opacity = '1';
+            rightSide.style.visibility = 'visible';
+        });
+    </script>
+
+    <script type="text/babel">
+        const { useState, useRef } = React;
+
+        // Simple Icons
+        const X = ({ className }) => (
+            React.createElement('svg', { className: className, width: "24", height: "24", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round" },
+                React.createElement('path', { d: "M18 6L6 18M6 6l12 12" })
+            )
+        );
+
+        const ChevronLeft = ({ className }) => (
+            React.createElement('svg', { className: className, width: "24", height: "24", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round" },
+                React.createElement('polyline', { points: "15,18 9,12 15,6" })
+            )
+        );
+
+        const ChevronRight = ({ className }) => (
+            React.createElement('svg', { className: className, width: "24", height: "24", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round" },
+                React.createElement('polyline', { points: "9,18 15,12 9,6" })
+            )
+        );
+
+        const HorizontalPortfolio = () => {
+            const [selectedProject, setSelectedProject] = useState(null);
+            const scrollContainerRef = useRef(null);
+
+            const scrollLeft = () => {
+                scrollContainerRef.current.scrollBy({
+                    left: -320,
+                    behavior: 'smooth'
+                });
+            };
+
+            const scrollRight = () => {
+                scrollContainerRef.current.scrollBy({
+                    left: 320,
+                    behavior: 'smooth'
+                });
+            };
+
+            const projects = [
+                {
+                    id: 1,
+                    title: "End-to-End ML Pipeline for MRI-Based Movement Disorder Diagnosis",
+                    shortDescription: "Built a production-ready ML system to classify MRI images with 91% accuracy, incorporating containerization, API deployment, and CI/CD automation for clinical use",
+                    image: "./1.jpg",
+                    category: "Computer Vision & MLOps",
+                    year: "2024",
+                    detailedDescription: "Developed a complete machine learning pipeline to classify MRI brain scans of movement disorder patients, achieving 91% accuracy and reducing manual analysis time by 40% through automated preprocessing and classification steps. The entire workflow—including preprocessing, training, and inference—was containerized using Docker and Docker Compose to ensure reproducibility across research and clinical environments. The trained model was deployed via FastAPI as a RESTful service with integrated preprocessing and top-3 prediction outputs. The API was hosted on a secure cloud virtual machine using Uvicorn, enabling real-time inference. A fully automated CI/CD pipeline was implemented using GitHub Actions, integrating testing (Pytest), linting (Flake8), container builds, and deployment scripts to streamline and secure delivery.",
+                    technologies: ["Python", "FastAPI", "Docker", "Docker Compose", "PyTorch/TensorFlow", "CI/CD", "GitHub Actions", "Uvicorn", "Pytest", "Flake8", "Cloud VM"],
+                    liveUrl: "#",
+                    githubUrl: "#",
+                    metrics: {
+                        accuracy: "91%",
+                        timeReduction: "40%",
+                        deployment: "Real-time API",
+                        cicdCoverage: "Full automation"
+                    }
+                },
+                {
+                    id: 2,
+                    title: "Custom Neural Network for NYC Taxi Demand Prediction",
+                    shortDescription: "Neural network built from scratch to predict NYC taxi demand trends with superior performance over classical ML algorithms",
+                    image: "./2.jpg",
+                    category: "Machine Learning",
+                    year: "2023",
+                    detailedDescription: "Developed a custom neural network from scratch to predict NYC taxi demand patterns, implementing backpropagation and gradient descent algorithms manually. The model achieved an RMSE of 2.3 on test data and outperformed classical ML algorithms including Linear Regression and XGBoost by 15% in mean absolute error. Processed large-scale NYC taxi trip datasets with comprehensive feature engineering and hyperparameter optimization, resulting in 10% improved model generalization. This project demonstrates deep understanding of neural network fundamentals and practical application to real-world transportation data.",
+                    technologies: ["Python", "NumPy", "Pandas", "Matplotlib", "Scikit-learn", "XGBoost", "Data Processing"],
+                    liveUrl: "#",
+                    githubUrl: "#",
+                    metrics: {
+                        rmse: "2.3",
+                        maeImprovement: "15% better than classical ML",
+                        generalization: "10% improvement"
+                    }
+                },
+                {
+                    id: 3,
+                    title: "Sentiment Analysis on Customer Reviews",
+                    shortDescription: "NLP model for multi-class sentiment classification using advanced deep learning techniques and comprehensive text preprocessing",
+                    image: "./3.jpg",
+                    category: "Natural Language Processing",
+                    year: "2023",
+                    detailedDescription: "Developed a comprehensive Natural Language Processing pipeline to classify customer reviews into positive, neutral, or negative sentiment categories using real-world datasets. Implemented and compared multiple machine learning approaches including Logistic Regression, Random Forest, and LSTM (Recurrent Neural Networks) for sentiment classification. The optimized deep learning model achieved 89% accuracy through advanced text preprocessing techniques including tokenization, stopword removal, stemming, and TF-IDF vectorization. Performance was rigorously evaluated using multiple metrics including F1-score, Precision, Recall, and ROC-AUC curves, demonstrating robust model performance across different sentiment classes.",
+                    technologies: ["Python", "LSTM", "TensorFlow/Keras", "Scikit-learn", "NLTK", "TF-IDF", "Pandas", "NumPy"],
+                    liveUrl: "#",
+                    githubUrl: "#",
+                    metrics: {
+                        accuracy: "89%",
+                        modelTypes: "3 algorithms compared",
+                        evaluationMetrics: "F1, Precision, Recall, ROC-AUC"
+                    }
+                },
+                {
+                    id: 4,
+                    title: "End-to-End BI & Predictive Analytics for Supply Chain Optimization",
+                    shortDescription: "Deployed Power BI dashboards, automated reporting pipelines, and developed predictive models to enhance visibility and operational efficiency across supply chain functions",
+                    image: "./4.jpg",
+                    category: "Business Intelligence & Predictive Analytics",
+                    year: "2023",
+                    detailedDescription: "Led the development and deployment of interactive Power BI dashboards to monitor sales, delivery, and inventory KPIs across three geographic regions, offering real-time visibility to business stakeholders and reducing manual reporting effort by 40%. Conducted deep analysis of over 1,000 delivery logs using SQL and Excel to uncover delay trends and address operational inefficiencies—leading to a 20% reduction in delays and increasing the on-time delivery rate from 72% to 86% within a single quarter. Built sales forecasting models in Python using linear regression and moving averages on historical transaction data, achieving over 90% accuracy. This enabled more accurate demand planning and contributed to a 25% reduction in inventory overstock. Additionally, cleaned and merged more than 10,000 records from Excel and SQL into structured, analysis-ready datasets. Automated data pipelines resolved over 100 quality issues and halved the weekly reporting effort.",
+                    technologies: ["Power BI", "SQL", "Python", "Excel", "Pandas", "Scikit-learn", "Linear Regression", "Forecasting", "ETL Automation"],
+                    liveUrl: "#",
+                    githubUrl: "#",
+                    metrics: {
+                        reportingReduction: "40%",
+                        onTimeDelivery: "72% to 86%",
+                        forecastAccuracy: "90%+",
+                        inventoryReduction: "25%",
+                        dataIssuesResolved: "100+"
+                    }
+                },
+                {
+                    id: 5,
+                    title: "Multilingual NLP Preprocessing Framework for Conversa's Conversational AI",
+                    shortDescription: "Built a modular, scalable NLP pipeline to process 500K+ transcripts, boosting training efficiency and improving intent classification performance",
+                    image: "./5.jpg",
+                    category: "Natural Language Processing & Conversational AI",
+                    year: "2024",
+                    detailedDescription: "Designed and developed a robust NLP preprocessing pipeline for Conversa's Conversational AI platform, processing over 500,000 multilingual user transcripts. The system reduced data preprocessing and model training time by 30% and led to a 15% improvement in intent classification accuracy. Leveraged Python, spaCy, NLTK, and regex to build modular components for text normalization, tokenization, lemmatization, and noise filtering—making the pipeline easily reusable across NLU tasks like intent classification and Named Entity Recognition (NER). Integrated multiple vectorization strategies including TF-IDF, Word2Vec, and BERT-based Sentence Transformers to improve model performance and clustering granularity. The final pipeline was designed with configuration-based modularity, version-controlled storage, and Git integration, enabling collaborative development and smooth deployment into Conversa's chatbot API infrastructure.",
+                    technologies: ["Python", "spaCy", "NLTK", "Regex", "TF-IDF", "Word2Vec", "BERT", "Sentence Transformers", "Modular Design", "Git", "Chatbot API"],
+                    liveUrl: "#",
+                    githubUrl: "#",
+                    metrics: {
+                        transcriptVolume: "500K+ multilingual records",
+                        timeReduction: "30%",
+                        accuracyImprovement: "15%",
+                        reusability: "Config-based modules"
+                    }
+                },
+                {
+                    id: 6,
+                    title: "RAG Anything: Retrieval-Augmented Generation for Insightful Data Interaction",
+                    shortDescription: "Built an intelligent assistant using Retrieval-Augmented Generation (RAG) to provide context-aware answers and insights from PDFs, Word docs, SQL databases, and more",
+                    image: "./6.jpg",
+                    category: "Retrieval-Augmented Generation (RAG) | Multimodal Data Intelligence",
+                    year: "2025",
+                    detailedDescription: "RAG Anything is an AI-driven assistant built to help users interact with complex datasets in natural language, powered by retrieval-augmented generation. It extracts, processes, and synthesizes data from heterogeneous sources such as PDFs, Word documents, SQL databases, and more—enabling seamless insight extraction across business, academic, and operational domains. The system parses multiple data formats and employs a RAG pipeline to combine traditional retrieval with modern generative models, producing highly relevant and context-aware answers. It supports tasks such as data summarization, semantic search, predictive analytics, and even multimodal insight generation. Data for development and testing was curated from public repositories (Kaggle, UCI), structured datasets like Chinook and Northwind, and synthetically generated datasets using Faker and Mockaroo. The modular architecture ensures adaptability across domains, offering users an intuitive experience to bridge the gap between raw data and strategic decisions.",
+                    technologies: ["Python", "LangChain", "LLMs (OpenAI)", "FAISS", "HuggingFace Transformers", "SQL", "PDF Parsing", "Document Embeddings", "Faker", "Mockaroo", "Streamlit/Gradio UI", "Chinook DB", "Northwind DB"],
+                    liveUrl: "#",
+                    githubUrl: "#",
+                    metrics: {
+                        dataSources: "PDFs, Word, SQL, Synthetic, Web",
+                        supportedTasks: "Summarization, Retrieval, Prediction, Search",
+                        multimodal: "Yes",
+                        realTimeQuery: "Enabled via RAG"
+                    }
+                },
+                {
+                    id: 7,
+                    title: "Smart Resume Parser API",
+                    shortDescription: "Production-grade REST API to extract structured information from resumes using NLP and modern backend technologies",
+                    image: "./7.jpg",
+                    category: "Software Development / NLP API",
+                    year: "2025",
+                    detailedDescription: "Designed and developed a scalable RESTful API to parse .pdf and .docx resumes and extract structured fields such as name, email, skills, education, and work experience. Integrated NLP techniques using spaCy and regular expressions to clean and process resume text. Implemented token-based authentication, logging, and asynchronous request handling using FastAPI. Deployed the application with Docker and GitHub Actions on a cloud platform for public use. This project showcases production-level engineering and ML integration for real-world document automation.",
+                    technologies: ["Python", "FastAPI", "spaCy", "PyMuPDF", "Docker", "PostgreSQL", "JWT Auth", "GitHub Actions"],
+                    liveUrl: "#",
+                    githubUrl: "#",
+                    metrics: {
+                        responseTime: "Average < 400ms",
+                        fileTypesSupported: "PDF, DOCX",
+                        accuracy: "Above 90% for structured resumes"
+                    }
+                },
+                {
+                    id: 8,
+                    title: "RESTful Backend for E-Commerce Platform",
+                    shortDescription: "Robust and modular backend system simulating an e-commerce store with cart, orders, user auth, and product catalog features",
+                    image: "./8.jpg",
+                    category: "Software Engineering / Backend Development",
+                    year: "2025",
+                    detailedDescription: "Developed a RESTful backend architecture for an e-commerce platform featuring secure user registration, login with JWT, product management, shopping cart, and order processing. Designed normalized relational database schemas using PostgreSQL and implemented clean, modular route handlers using Flask. Employed test-driven development with PyTest and Postman. Deployed a containerized version of the API using Docker and CI/CD pipelines via GitHub Actions. The project demonstrates backend design, data modeling, and production deployment best practices.",
+                    technologies: ["Python", "Flask", "PostgreSQL", "JWT", "Docker", "PyTest", "GitHub Actions", "Postman"],
+                    liveUrl: "#",
+                    githubUrl: "#",
+                    metrics: {
+                        coverage: "95% API endpoints covered with unit tests",
+                        authFlow: "JWT-based, stateless sessions",
+                        deploymentTime: "Fully automated pipeline (<5 min)"
+                    }
+                },
+                {
+                    id: 9,
+                    title: "CI/CD Pipeline for Machine Learning API",
+                    shortDescription: "End-to-end containerized machine learning inference API with CI/CD automation and cloud deployment",
+                    image: "./9.jpg",
+                    category: "DevOps / Machine Learning Engineering",
+                    year: "2025",
+                    detailedDescription: "Built a machine learning inference API with FastAPI and integrated a complete CI/CD pipeline using Docker and GitHub Actions. The ML model predicts customer churn based on structured input features and is served through a stateless microservice. Each push to the main branch triggers container builds, runs tests, and deploys the updated container to Render. The project focuses on combining ML and software engineering practices to deliver scalable and reliable services in production environments.",
+                    technologies: ["Python", "FastAPI", "Docker", "GitHub Actions", "Scikit-learn", "Pydantic", "Render"],
+                    liveUrl: "#",
+                    githubUrl: "#",
+                    metrics: {
+                        deploymentFrequency: "On every push to main",
+                        downtimeDuringUpdate: "Zero (blue-green strategy)",
+                        inferenceLatency: "<200ms for average prediction"
+                    }
+                },
+                {
+                    id: 10,
+                    title: "Real-Time Air Quality Monitoring System",
+                    shortDescription: "Backend service to collect, store, and serve real-time air quality data using public APIs, CRON jobs, and RESTful endpoints",
+                    image: "./10.jpg",
+                    category: "Backend Development / Data Engineering",
+                    year: "2025",
+                    detailedDescription: "Engineered a backend system to collect and store air quality data from public APIs (like OpenWeatherMap) using CRON jobs. Built REST endpoints to query historical and live data by location and date. Implemented a time-series optimized PostgreSQL database with proper indexing and partitioning to enable fast data access. The system logs and visualizes trends, highlighting potential health risks. Optional extensions included cache layer with Redis and a React dashboard for visualization. This project shows backend engineering, data pipeline design, and performance tuning.",
+                    technologies: ["Python", "FastAPI", "PostgreSQL", "CRON", "OpenWeatherMap API", "Redis", "Docker", "Pandas"],
+                    liveUrl: "#",
+                    githubUrl: "#",
+                    metrics: {
+                        apiCallFrequency: "Every 10 mins",
+                        queryResponseTime: "< 250ms with cache",
+                        dataRetention: "30-day rolling window"
+                    }
+                },
+                {
+                    id: 11,
+                    title: "PDF Chat Assistant Using LLMs and Vector Search",
+                    shortDescription: "Microservice-based chatbot that processes PDFs, stores embeddings, and enables semantic search with language models",
+                    image: "./11.jpg",
+                    category: "LLM Applications / Software Architecture",
+                    year: "2025",
+                    detailedDescription: "Developed a conversational chatbot that enables users to upload PDFs and ask context-aware questions about the content. Architected the solution as microservices: one for file processing, one for embedding generation (using HuggingFace + SentenceTransformers), and another for vector search using FAISS or Pinecone. Exposed the system through REST APIs with FastAPI, and optionally created a React-based chat frontend. Demonstrates proficiency in building modular software systems, integrating LLMs, and deploying intelligent features.",
+                    technologies: ["Python", "FastAPI", "FAISS", "LangChain", "SentenceTransformers", "Docker", "React (optional)", "Pinecone (optional)"],
+                    liveUrl: "#",
+                    githubUrl: "#",
+                    metrics: {
+                        embeddingTime: "< 5s per document",
+                        responseRelevanceScore: "~85%+ top-1 semantic match",
+                        deploymentFootprint: "3 isolated services with independent scaling"
+                    }
+                }
+            ];
+
+            // Tech stack data
+            const softwareTechStack = [
+                { name: "Python", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg", color: "#3776ab" },
+                { name: "JavaScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg", color: "#f7df1e" },
+                { name: "FastAPI", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg", color: "#009688" },
+                { name: "Flask", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg", color: "#000000" },
+                { name: "PostgreSQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg", color: "#336791" },
+                { name: "Docker", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg", color: "#2496ed" },
+                { name: "Git", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg", color: "#f05032" },
+                { name: "GitHub", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg", color: "#2088ff" },
+                { name: "REST API", icon: "https://img.icons8.com/color/48/api-settings.png", color: "#61dafb" },
+                { name: "JWT", icon: "https://img.icons8.com/color/48/java-web-token.png", color: "#000000" }
+            ];
+
+            const dataScienceTechStack = [
+                { name: "Python", icon: "https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg", color: "#3776ab" },
+                { name: "Pandas", icon: "https://raw.githubusercontent.com/pandas-dev/pandas/main/web/pandas/static/img/pandas.svg", color: "#150458" },
+                { name: "NumPy", icon: "https://raw.githubusercontent.com/devicons/devicon/master/icons/numpy/numpy-original.svg", color: "#013243" },
+                { name: "Scikit-learn", icon: "https://scikit-learn.org/stable/_static/scikit-learn-logo-small.png", color: "#f7931e" },
+                { name: "TensorFlow", icon: "https://raw.githubusercontent.com/devicons/devicon/master/icons/tensorflow/tensorflow-original.svg", color: "#ff6f00" },
+                { name: "NLTK", icon: "https://www.nltk.org/_static/nltk.png", color: "#3776ab" },
+                { name: "Matplotlib", icon: "https://matplotlib.org/_static/images/logo2.svg", color: "#11557c" },
+                { name: "SQL", icon: "https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original.svg", color: "#336791" },
+                { name: "Jupyter", icon: "https://raw.githubusercontent.com/devicons/devicon/master/icons/jupyter/jupyter-original.svg", color: "#f37626" },
+                { name: "Git", icon: "https://raw.githubusercontent.com/devicons/devicon/master/icons/git/git-original.svg", color: "#f05032" }
+            ];
+
+            return React.createElement('div', { className: "min-h-screen bg-white py-16 px-4" },
+                React.createElement('div', { className: "max-w-7xl mx-auto" },
+                    // Software Development Projects Section
+                    React.createElement('div', { className: "mb-16", id: "software-projects" },
+                        
+                        // Section Intro
+                        React.createElement('div', { className: "section-intro mb-8" },
+                            React.createElement('img', { 
+                                src: "./sd.jpg", 
+                                alt: "Software Development",
+                                className: "section-photo"
+                            }),
+                            React.createElement('div', { className: "section-text-content" },
+                                React.createElement('h2', { className: "section-main-title" }, "Software Development in Action"),
+                                React.createElement('div', { className: "section-description" },
+                                    "I love building things that work, scale, and solve real problems. While data and machine learning shaped how I think, software development gave me the tools to bring those ideas to life. There's something incredibly satisfying about writing code that not only works but fits into a bigger system."
+                                )
+                            )
+                        ),
+
+                        React.createElement('h3', { className: "projects-subheading" }, "Things I've built as a developer."),
+
+                        React.createElement('div', { className: "relative" },
+                            // Left Arrow
+                            React.createElement('button', {
+                                onClick: () => {
+                                    document.querySelector('.sw-scroll-container').scrollBy({
+                                        left: -320,
+                                        behavior: 'smooth'
+                                    });
+                                },
+                                className: "absolute left-2 top-1/2 transform -translate-y-1/2 z-10 bg-gray-50 hover:bg-gray-100 rounded-full p-2 transition-colors duration-200 border border-gray-200",
+                                'aria-label': "Scroll left"
+                            }, React.createElement(ChevronLeft, { className: "w-5 h-5 text-gray-600" })),
+
+                            // Right Arrow
+                            React.createElement('button', {
+                                onClick: () => {
+                                    document.querySelector('.sw-scroll-container').scrollBy({
+                                        left: 320,
+                                        behavior: 'smooth'
+                                    });
+                                },
+                                className: "absolute right-2 top-1/2 transform -translate-y-1/2 z-10 bg-gray-50 hover:bg-gray-100 rounded-full p-2 transition-colors duration-200 border border-gray-200",
+                                'aria-label': "Scroll right"
+                            }, React.createElement(ChevronRight, { className: "w-5 h-5 text-gray-600" })),
+
+                            // Software Development Projects Scrollable Container
+                            React.createElement('div', {
+                                className: "sw-scroll-container flex gap-6 overflow-x-auto scrollbar-hide px-10 py-4",
+                                style: { scrollbarWidth: 'none', msOverflowStyle: 'none' }
+                            },
+                                projects.filter(project => [7, 8, 9, 10, 11].includes(project.id)).map(project =>
+                                    React.createElement('div', {
+                                        key: project.id,
+                                        className: "flex-shrink-0 w-72 bg-white border border-gray-200 rounded-lg overflow-hidden cursor-pointer hover:shadow-lg transition-shadow duration-200 relative group",
+                                        onClick: () => setSelectedProject(project)
+                                    },
+                                        // Project Image
+                                        React.createElement('div', { className: "bg-gray-100 relative" },
+                                            React.createElement('img', {
+                                                src: project.image,
+                                                alt: project.title,
+                                                className: "w-full h-64 object-cover"
+                                            }),
+                                            
+                                            // Hover Overlay
+                                            React.createElement('div', { className: "absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-70 transition-all duration-300 flex items-center justify-center" },
+                                                React.createElement('div', { className: "text-center p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300" },
+                                                    React.createElement('h3', { className: "text-white text-lg font-medium mb-2 leading-tight" }, project.title),
+                                                    React.createElement('p', { className: "text-gray-200 text-sm leading-relaxed" }, project.shortDescription)
+                                                )
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        ),
+
+                        // Software Development Tech Stack
+                        React.createElement('div', { className: "tech-stack-section" },
+                            React.createElement('h3', { className: "tech-stack-title" }, "Tech Stack"),
+                            React.createElement('div', { className: "tech-stack-grid" },
+                                softwareTechStack.map(tech =>
+                                    React.createElement('div', {
+                                        key: tech.name,
+                                        className: "tech-item"
+                                    },
+                                        React.createElement('div', { 
+                                            className: "tech-icon"
+                                        }, 
+                                            React.createElement('img', {
+                                                src: tech.icon,
+                                                alt: tech.name,
+                                                style: { filter: tech.name === 'GitHub' ? 'invert(1)' : 'none' }
+                                            })
+                                        ),
+                                        React.createElement('span', { className: "tech-name" }, tech.name)
+                                    )
+                                )
+                            )
+                        )
+                    ),
+
+                    // Data Science Projects Section
+                    React.createElement('div', { id: "data-science-projects" },
+                        
+                        // Section Intro
+                        React.createElement('div', { className: "section-intro mb-8" },
+                            React.createElement('img', { 
+                                src: "./ds.jpg", 
+                                alt: "Data Science",
+                                className: "section-photo"
+                            }),
+                            React.createElement('div', { className: "section-text-content" },
+                                React.createElement('h2', { className: "section-main-title" }, "Me as a Data Scientist"),
+                                React.createElement('div', { className: "section-description" },
+                                    "For me, data science is about more than just numbers—it's about discovering stories, finding signals in the noise, and making decisions smarter. I enjoy the process of digging deep, experimenting with models, and building solutions that actually learn and adapt."
+                                )
+                            )
+                        ),
+
+                        React.createElement('h3', { className: "projects-subheading" }, "Projects driven by data."),
+
+                        React.createElement('div', { className: "relative" },
+                            // Left Arrow
+                            React.createElement('button', {
+                                onClick: scrollLeft,
+                                className: "absolute left-2 top-1/2 transform -translate-y-1/2 z-10 bg-gray-50 hover:bg-gray-100 rounded-full p-2 transition-colors duration-200 border border-gray-200",
+                                'aria-label': "Scroll left"
+                            }, React.createElement(ChevronLeft, { className: "w-5 h-5 text-gray-600" })),
+
+                            // Right Arrow
+                            React.createElement('button', {
+                                onClick: scrollRight,
+                                className: "absolute right-2 top-1/2 transform -translate-y-1/2 z-10 bg-gray-50 hover:bg-gray-100 rounded-full p-2 transition-colors duration-200 border border-gray-200",
+                                'aria-label': "Scroll right"
+                            }, React.createElement(ChevronRight, { className: "w-5 h-5 text-gray-600" })),
+
+                            // Data Science Projects Scrollable Container
+                            React.createElement('div', {
+                                ref: scrollContainerRef,
+                                className: "flex gap-6 overflow-x-auto scrollbar-hide px-10 py-4",
+                                style: { scrollbarWidth: 'none', msOverflowStyle: 'none' }
+                            },
+                                projects.filter(project => [1, 2, 3, 4, 5, 6].includes(project.id)).map(project =>
+                                    React.createElement('div', {
+                                        key: project.id,
+                                        className: "flex-shrink-0 w-72 bg-white border border-gray-200 rounded-lg overflow-hidden cursor-pointer hover:shadow-lg transition-shadow duration-200 relative group",
+                                        onClick: () => setSelectedProject(project)
+                                    },
+                                        // Project Image
+                                        React.createElement('div', { className: "bg-gray-100 relative" },
+                                            React.createElement('img', {
+                                                src: project.image,
+                                                alt: project.title,
+                                                className: "w-full h-64 object-cover"
+                                            }),
+                                            
+                                            // Hover Overlay
+                                            React.createElement('div', { className: "absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-70 transition-all duration-300 flex items-center justify-center" },
+                                                React.createElement('div', { className: "text-center p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300" },
+                                                    React.createElement('h3', { className: "text-white text-lg font-medium mb-2 leading-tight" }, project.title),
+                                                    React.createElement('p', { className: "text-gray-200 text-sm leading-relaxed" }, project.shortDescription)
+                                                )
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        ),
+
+                        // Data Science Tech Stack
+                        React.createElement('div', { className: "tech-stack-section" },
+                            React.createElement('h3', { className: "tech-stack-title" }, "Tech Stack"),
+                            React.createElement('div', { className: "tech-stack-grid" },
+                                dataScienceTechStack.map(tech =>
+                                    React.createElement('div', {
+                                        key: tech.name,
+                                        className: "tech-item"
+                                    },
+                                        React.createElement('div', { 
+                                            className: "tech-icon"
+                                        }, 
+                                            React.createElement('img', {
+                                                src: tech.icon,
+                                                alt: tech.name
+                                            })
+                                        ),
+                                        React.createElement('span', { className: "tech-name" }, tech.name)
+                                    )
+                                )
+                            )
+                        )
+                    ),
+
+                    // Modal
+                    selectedProject && React.createElement('div', { className: "fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[9999] p-4" },
+                        React.createElement('div', { className: "bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto relative" },
+                            // Modal Header with visible X button
+                            React.createElement('div', { className: "flex justify-end p-6 border-b border-gray-100 sticky top-0 bg-white z-[10000]" },
+                                React.createElement('button', {
+                                    onClick: () => setSelectedProject(null),
+                                    className: "p-3 hover:bg-gray-100 rounded-full transition-colors duration-200 bg-white shadow-lg border border-gray-200"
+                                }, React.createElement(X, { className: "w-6 h-6 text-gray-700 hover:text-gray-900" }))
+                            ),
+
+                            // Modal Content
+                            React.createElement('div', { className: "p-8" },
+                                // Project Image
+                                React.createElement('div', { className: "mb-8 text-center" },
+                                    React.createElement('img', {
+                                        src: selectedProject.image,
+                                        alt: selectedProject.title,
+                                        className: "w-full max-w-md h-64 object-cover rounded mx-auto"
+                                    })
+                                ),
+
+                                // Project Title
+                                React.createElement('div', { className: "text-center mb-8" },
+                                    React.createElement('h2', { className: "text-2xl font-light text-gray-900 mb-4" }, selectedProject.title),
+                                    React.createElement('p', { className: "text-gray-600 mb-6 max-w-2xl mx-auto" }, selectedProject.shortDescription)
+                                ),
+
+                                // Description Section
+                                React.createElement('div', { className: "max-w-3xl mx-auto" },
+                                    React.createElement('h3', { className: "text-lg font-medium text-gray-900 mb-4" }, "Description"),
+                                    React.createElement('p', { className: "text-gray-700 leading-relaxed mb-8" }, selectedProject.detailedDescription),
+
+                                    // Metrics and Technologies Grid
+                                    React.createElement('div', { className: "grid md:grid-cols-2 gap-8" },
+                                        // Key Metrics
+                                        selectedProject.metrics && React.createElement('div', {},
+                                            React.createElement('h4', { className: "text-base font-medium text-gray-900 mb-3" }, "Key Metrics"),
+                                            React.createElement('div', { className: "space-y-2" },
+                                                Object.entries(selectedProject.metrics).map(([key, value]) =>
+                                                    React.createElement('div', { key: key, className: "flex justify-between text-sm" },
+                                                        React.createElement('span', { className: "text-gray-600" }, 
+                                                            key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase()) + ":"
+                                                        ),
+                                                        React.createElement('span', { className: "text-gray-900 font-medium" }, value)
+                                                    )
+                                                )
+                                            )
+                                        ),
+
+                                        // Technologies
+                                        React.createElement('div', {},
+                                            React.createElement('h4', { className: "text-base font-medium text-gray-900 mb-3" }, "Technologies"),
+                                            React.createElement('div', { className: "flex flex-wrap gap-2" },
+                                                selectedProject.technologies.map(tech =>
+                                                    React.createElement('span', {
+                                                        key: tech,
+                                                        className: "bg-gray-100 text-gray-700 px-2 py-1 rounded text-sm"
+                                                    }, tech)
+                                                )
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            );
+        };
+
+        ReactDOM.render(React.createElement(HorizontalPortfolio), document.getElementById('portfolio-root'));
+    </script>
+</body>
+</html>
